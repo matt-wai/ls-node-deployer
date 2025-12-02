@@ -60,10 +60,7 @@ services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
+    network_mode: host
     environment:
       INITIAL_ADMIN_EMAIL: "$NPM_EMAIL"
       INITIAL_ADMIN_PASSWORD: "$NPM_PASSWORD"
