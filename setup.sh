@@ -28,6 +28,8 @@ Options:
     --npm-password PASS     Admin password for Nginx Proxy Manager
     --skip-frps             Skip frps installation
     --skip-npm              Skip Nginx Proxy Manager installation
+    --skip-swap             Skip swap setup
+    --swap-size SIZE        Swap file size (default: 4G)
     -h, --help              Show this help
 
 Examples:
@@ -49,7 +51,9 @@ EOF
 # Defaults
 SKIP_FRPS=false
 SKIP_NPM=false
+SKIP_SWAP=false
 export FRPS_PORT="${FRPS_PORT:-6819}"
+export SWAP_SIZE="${SWAP_SIZE:-4G}"
 
 # Parse args
 while [[ $# -gt 0 ]]; do
@@ -60,6 +64,8 @@ while [[ $# -gt 0 ]]; do
         --npm-password) export NPM_PASSWORD="$2"; shift 2 ;;
         --skip-frps) SKIP_FRPS=true; shift ;;
         --skip-npm) SKIP_NPM=true; shift ;;
+        --skip-swap) SKIP_SWAP=true; shift ;;
+        --swap-size) export SWAP_SIZE="$2"; shift 2 ;;
         -h|--help) usage ;;
         *) err "Unknown option: $1"; usage ;;
     esac
@@ -70,6 +76,14 @@ log "🐳 Starting Lightsail Node Deployer..."
 # Update system
 log "Updating system packages..."
 sudo apt-get update -qq
+
+# Setup swap
+if [ "$SKIP_SWAP" = false ]; then
+    log "Setting up ${SWAP_SIZE} swap..."
+    bash "$SCRIPT_DIR/scripts/setup-swap.sh"
+else
+    log "Skipping swap setup"
+fi
 
 # Install frps
 if [ "$SKIP_FRPS" = false ]; then
@@ -90,6 +104,7 @@ fi
 log "🎉 Setup complete!"
 echo ""
 echo -e "${GREEN}Summary:${NC}"
+[ "$SKIP_SWAP" = false ] && echo "  • Swap: ${SWAP_SIZE}"
 [ "$SKIP_FRPS" = false ] && echo "  • frps running on port $FRPS_PORT"
 [ "$SKIP_NPM" = false ] && echo "  • Nginx Proxy Manager at http://<your-ip>:81"
 echo ""
