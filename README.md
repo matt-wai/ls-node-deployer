@@ -31,6 +31,8 @@ Will prompt for required values.
 | `--npm-password` | NPM admin password | (prompted) |
 | `--skip-frps` | Skip frps installation | - |
 | `--skip-npm` | Skip NPM installation | - |
+| `--skip-swap` | Skip swap setup | - |
+| `--swap-size` | Swap file size | 4G |
 
 ## Examples
 
@@ -57,6 +59,11 @@ Open these in Lightsail networking:
 | 443 | HTTPS |
 
 ## What Gets Installed
+
+### Swap
+- File: `/swapfile` (4G by default)
+- Persisted in `/etc/fstab`
+- Swappiness tuned to 10
 
 ### frps
 - Binary: `/opt/frps/frps`
