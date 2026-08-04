@@ -1,0 +1,14 @@
+[Unit]
+Description=🐳 Weekly Nginx Proxy Manager auto-update
+Documentation=https://github.com/matt-wai/ls-node-deployer
+
+[Timer]
+# One hour after the Sunday 03:00 weekly-reboot window, so the box is freshly
+# booted on current host packages before the container is touched.
+OnCalendar=Sun *-*-* 04:00:00 America/Chicago
+RandomizedDelaySec=600
+Persistent=true
+Unit=npm-autoupdate.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,19 @@
+[Unit]
+Description=🐳 Nginx Proxy Manager auto-update (image patch level)
+Documentation=https://github.com/matt-wai/ls-node-deployer
+After=docker.service network-online.target
+Requires=docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/local/sbin/npm-autoupdate.sh
+# Migrations + image pull on a 2-core Lightsail box; give it room.
+TimeoutStartSec=1800
+Nice=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
