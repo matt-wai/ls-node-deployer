@@ -31,7 +31,7 @@ TAG_OFFSET=0
 
 # Enabled public proxy hosts. Verification is relative to a pre-change
 # baseline, so upstreams that are already down do not block an upgrade.
-HEALTH_HOSTS="api.orion.aliasintelligence.com api.scout.aliasintelligence.com drx.scout.aliasintelligence.com api.deployer.aliasintelligence.com nginx.scout.aliasintelligence.com xmas.aliasintelligence.com"
+HEALTH_HOSTS="api.orion.aliasintelligence.com drx.scout.aliasintelligence.com api.deployer.aliasintelligence.com nginx.scout.aliasintelligence.com"
 
 BACKUP_DIR="/var/backups/npm"
 KEEP_BACKUPS=6

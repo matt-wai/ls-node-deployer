@@ -17,7 +17,7 @@ CONTAINER="nginx-proxy-manager"
 IMAGE_REPO="jc21/nginx-proxy-manager"
 # 0 = newest release, 1 = one behind, 2 = two behind.
 TAG_OFFSET=0
-HEALTH_HOSTS="api.orion.aliasintelligence.com api.scout.aliasintelligence.com drx.scout.aliasintelligence.com api.deployer.aliasintelligence.com nginx.scout.aliasintelligence.com xmas.aliasintelligence.com"
+HEALTH_HOSTS="api.orion.aliasintelligence.com drx.scout.aliasintelligence.com api.deployer.aliasintelligence.com nginx.scout.aliasintelligence.com"
 BACKUP_DIR="/var/backups/npm"
 KEEP_BACKUPS=6
 HEALTH_TIMEOUT=240
